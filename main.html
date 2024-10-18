@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="particles-js"></div>
+    <header>
+        <nav>
+            <div class="logo">My Portfolio</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <h1>Hello, I'm <span class="highlight">Name</span></h1>
+            <p>Rust Developer | DevOps | Creative Thinker</p>
+            <a href="#contact" class="cta-button">Get in Touch</a>
+        </section>
+
+        <section id="about" class="about">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <img src="/api/placeholder/300/300" alt="My photo" class="profile-image">
+                <p>
+                    I am a passionate and versatile developer specializing in creating dynamic and immersive experiences through thoughtful and innovative coding.
+                    With a strong foundation in [insert specific languages, like Python, C++, etc.],
+                    I bring creativity, precision, and efficiency to every project.
+                    My expertise spans across building complex systems, game development, and crafting user-centric applications, always ensuring optimal performance and an intuitive user experience.</p>
+            </div>
+        </section>
+
+        <div class="projects-section">
+    <h2>My Projects</h2>
+    <div class="projects-container">
+        <div class="project-card">
+            <h3>Project 1</h3>
+            <p>This is a brief description of Project 1. It's a cool project about...</p>
+            <a href="#" class="project-btn">View Project</a>
+        </div>
+        <div class="project-card">
+            <h3>Project 2</h3>
+            <p>This is a brief description of Project 2. It's a unique project that...</p>
+            <a href="#" class="project-btn">View Project</a>
+        </div>
+        <div class="project-card">
+            <h3>Project 3</h3>
+            <p>This is a brief description of Project 3. It involves an innovative approach to...</p>
+            <a href="#" class="project-btn">View Project</a>
+        </div>
+        <!-- Add more project cards as needed -->
+    </div>
+</div>
+
+        <section id="contact" class="contact">
+            <h2>Get in Touch</h2>
+            <form id="contact-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <textarea name="message" placeholder="Your Message" required></textarea>
+                <button type="submit" class="submit-button">Send Message</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+    <div class="social-icons">
+        <a href="https://github.com/Abendgast" target="_blank"><i class="fab fa-github"></i></a>
+        <a href="https://web.telegram.org/k/#@Abendgast" target="_blank"><i class="fab fa-telegram"></i></a>
+        <a href="https://www.linkedin.com/in/ваш-профиль/" target="_blank"><i class="fab fa-linkedin"></i></a> <!-- Добавьте ваш LinkedIn профиль -->
+    </div>
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
