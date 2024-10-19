@@ -19,8 +19,40 @@ body {
     font-family: 'Poppins', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
-    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Ensures no horizontal scrolling */
+    background-color: #1a1a1a; /* Dark base color */
 }
+
+#modern-morph {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw; /* Full viewport width */
+    height: 100vh; /* Full viewport height */
+    z-index: -1; /* Behind the content */
+    background: radial-gradient(circle at 20% 20%, #6200ea, #000000, #0d47a1, #1a1a1a);
+    filter: blur(40px); /* Reduced blur effect */
+    animation: morphingGradient 45s ease infinite; /* Slowed down the animation */
+}
+
+@keyframes morphingGradient {
+    0% {
+        background-position: 0% 0%;
+        background-size: 130%;
+    }
+    50% {
+        background-position: 50% 50%;
+        background-size: 150%; /* Reduced zoom effect */
+    }
+    100% {
+        background-position: 0% 0%;
+        background-size: 130%;
+    }
+}
+
+
 
 #particles-js {
     position: fixed;
@@ -177,7 +209,6 @@ h2 {
 
 .about {
     padding: 50px 20px;
-    background-color: var(--background-color);
 }
 
 .about h2 {
@@ -193,6 +224,11 @@ h2 {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
+    background-color: rgba(34, 34, 34, 0.7); /* Semi-transparent background */
+    border-radius: 20px; /* Rounded corners */
+    backdrop-filter: blur(8px); /* Blur effect */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for better visibility */
+    transition: all 0.4s ease;
 }
 
 .profile-image {
@@ -201,7 +237,7 @@ h2 {
     border-radius: 50%;
     object-fit: cover;
     margin-right: 40px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 15px rgba(173, 4, 255, 0.2);
 }
 
 .about-content p {
@@ -211,16 +247,13 @@ h2 {
     color: var(--text-color);
     margin: 0;
     padding: 20px;
-    border: 2px solid transparent;
-    transition: all 0.4s ease;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
 }
 
-.about-content p:hover {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);
-    transform: scale(1.05);
-}
+/*.about-content p:hover {*/
+/*    border-color: var(--primary-color);*/
+/*    box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);*/
+/*    transform: scale(1.05);*/
+/*}*/
 
 @media screen and (max-width: 768px) {
     .about-content {
@@ -310,10 +343,9 @@ h2 {
     padding: 12px;
     margin-bottom: 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 15px;
     background-color: var(--card-background);
     color: var(--text-color);
-    font-family: 'Poppins', sans-serif;
 }
 
 .contact textarea {
