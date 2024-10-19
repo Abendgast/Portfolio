@@ -1,3 +1,7 @@
+
+
+
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 :root {
@@ -8,6 +12,11 @@
     --card-background: #222222;
     --accent-color: #e0e0e0;
 }
+
+
+
+
+
 
 * {
     margin: 0;
