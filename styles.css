@@ -27,7 +27,6 @@ body {
 
 /*-------------------------------------------------------------------------ANIM 1-------------------------------------------------------------------------*/
 
-
 /*#modern-morph {*/
 /*    position: fixed;*/
 /*    top: 0;*/
@@ -60,7 +59,6 @@ body {
 
 
 /*-------------------------------------------------------------------------ANIM 2-------------------------------------------------------------------------*/
-
 
 @keyframes shimmerMatter {
   0%, 100% {
@@ -122,42 +120,10 @@ body {
 
 /*-------------------------------------------------------------------------*ANIM 2-------------------------------------------------------------------------**/
 
-/*-------------------------------------------------------------------------*ANIM3-------------------------------------------------------------------------**/
-/*.bg-container {*/
-/*  position: fixed;*/
-/*  top: 0;*/
-/*  left: 0;*/
-/*  width: 100vw;*/
-/*  height: 100vh;*/
-/*  overflow: hidden;*/
-/*  z-index: -1;*/
-/*  filter: blur(20px);*/
-/*}*/
-
-/*.amorphous-blob {*/
-/*  position: absolute;*/
-/*  border-radius: 50%;*/
-/*  opacity: 0.5;*/
-/*  background: radial-gradient(circle at center, rgb(138, 43, 226), rgba(75, 0, 130, 0.2));*/
-/*  animation: float 20s infinite ease-in-out;*/
-/*}*/
-
-/*@keyframes float {*/
-/*  0%, 100% { transform: translate(0, 0) scale(1); }*/
-/*  25% { transform: translate(50px, -30px) scale(1.1); }*/
-/*  50% { transform: translate(-20px, 40px) scale(0.9); }*/
-/*  75% { transform: translate(30px, -50px) scale(1.05); }*/
-/*}*/
-
-/*!* Blob variations *!*/
-/*.blob1 { width: 150px; height: 150px; left: 10%; top: 20%; animation-delay: -2s; }*/
-/*.blob2 { width: 100px; height: 100px; left: 30%; top: 50%; animation-delay: -5s; }*/
-/*.blob3 { width: 200px; height: 200px; left: 50%; top: 30%; animation-delay: -8s; }*/
-/*.blob4 { width: 120px; height: 120px; left: 70%; top: 60%; animation-delay: -3s; }*/
-/*.blob5 { width: 180px; height: 180px; left: 80%; top: 10%; animation-delay: -6s; }*/
-/*-------------------------------------------------------------------------*ANIM3-------------------------------------------------------------------------**/
+/*-------------------------------------------------------------------------ANIM 3-------------------------------------------------------------------------*/
 
 
+/*-------------------------------------------------------------------------ANIM 3-------------------------------------------------------------------------*/
 
 
 
@@ -178,15 +144,20 @@ header {
     background-color: rgba(17, 17, 17, 0.8);
     backdrop-filter: blur(10px);
     position: fixed;
-    width: 100%;
+    width: 75%; /* Changed from 100% to 80% */
+    left: 50%; /* Center the header */
+    transform: translateX(-50%); /* Center the header */
     z-index: 1000;
+    border-bottom-left-radius: 35px; /* Rounded bottom corners */
+    border-bottom-right-radius: 25px;
+    padding-bottom: 10px; /* Add some padding at the bottom */
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px;
+    padding: 20px 30px; /* Increased horizontal padding */
 }
 
 .logo {
@@ -363,6 +334,7 @@ h2 {
 /*}*/
 
 @media screen and (max-width: 768px) {
+
     .about-content {
         flex-direction: column;
         text-align: center;
@@ -473,19 +445,27 @@ h2 {
     overflow: hidden;
 }
 
-.submit-button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    transition: all 0.5s;
-}
+/* ... (other styles remain unchanged) ... */
 
-.submit-button:hover::before {
-    left: 100%;
+@media screen and (max-width: 768px) {
+    /* ... (other mobile styles remain unchanged) ... */
+
+    .contact form {
+        width: 90%; /* Make the form narrower on mobile */
+        max-width: 400px; /* Set a maximum width for very wide mobile screens */
+        margin: 0 auto; /* Center the form */
+    }
+
+    .contact input,
+    .contact textarea {
+        font-size: 16px; /* Ensure the font is large enough to prevent zooming on iOS */
+    }
+
+    .submit-button {
+        display: block; /* Make the button a block element */
+        margin: 0 auto; /* Center the button */
+        width: fit-content; /* Make the button width fit its content */
+    }
 }
 
 footer {
