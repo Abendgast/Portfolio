@@ -21,10 +21,9 @@ body {
     color: var(--text-color);
     margin: 0;
     padding: 0;
-    overflow-x: hidden; /* Ensures no horizontal scrolling */
-    background-color: #1a1a1a; /* Dark base color */
+    overflow-x: hidden;
+    background-color: #1a1a1a;
 }
-
 /*-------------------------------------------------------------------------ANIM 1-------------------------------------------------------------------------*/
 
 /*#modern-morph {*/
@@ -126,14 +125,6 @@ body {
 /*-------------------------------------------------------------------------ANIM 3-------------------------------------------------------------------------*/
 
 
-
-#particles-js {
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-}
-
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -144,20 +135,20 @@ header {
     background-color: rgba(17, 17, 17, 0.8);
     backdrop-filter: blur(10px);
     position: fixed;
-    width: 75%; /* Changed from 100% to 80% */
-    left: 50%; /* Center the header */
-    transform: translateX(-50%); /* Center the header */
+    width: 80%;
+    left: 50%;
+    transform: translateX(-50%);
     z-index: 1000;
-    border-bottom-left-radius: 35px; /* Rounded bottom corners */
+    border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
-    padding-bottom: 10px; /* Add some padding at the bottom */
+    padding-bottom: 10px;
 }
 
 nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 30px; /* Increased horizontal padding */
+    padding: 20px 30px;
 }
 
 .logo {
@@ -188,15 +179,6 @@ nav {
 
 .burger {
     display: none;
-    cursor: pointer;
-}
-
-.burger div {
-    width: 25px;
-    height: 3px;
-    background-color: var(--text-color);
-    margin: 5px;
-    transition: all 0.3s ease;
 }
 
 .hero {
@@ -209,17 +191,6 @@ nav {
     padding: 0 20px;
     position: relative;
     overflow: hidden;
-}
-
-
-
-@keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
 }
 
 .hero h1 {
@@ -275,8 +246,6 @@ section {
     position: relative;
 }
 
-
-
 h2 {
     font-size: 2.5rem;
     margin-bottom: 40px;
@@ -302,10 +271,10 @@ h2 {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background-color: rgba(34, 34, 34, 0.7); /* Semi-transparent background */
-    border-radius: 20px; /* Rounded corners */
-    backdrop-filter: blur(8px); /* Blur effect */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* Shadow for better visibility */
+    background-color: rgba(34, 34, 34, 0.7);
+    border-radius: 20px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     transition: all 0.4s ease;
 }
 
@@ -325,29 +294,6 @@ h2 {
     color: var(--text-color);
     margin: 0;
     padding: 20px;
-}
-
-/*.about-content p:hover {*/
-/*    border-color: var(--primary-color);*/
-/*    box-shadow: 0 0 20px rgba(138, 43, 226, 0.6);*/
-/*    transform: scale(1.05);*/
-/*}*/
-
-@media screen and (max-width: 768px) {
-
-    .about-content {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .profile-image {
-        margin-right: 0;
-        margin-bottom: 20px;
-    }
-
-    .about-content p {
-        margin-bottom: 20px;
-    }
 }
 
 .projects-section {
@@ -445,27 +391,19 @@ h2 {
     overflow: hidden;
 }
 
-/* ... (other styles remain unchanged) ... */
+.submit-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: all 0.5s;
+}
 
-@media screen and (max-width: 768px) {
-    /* ... (other mobile styles remain unchanged) ... */
-
-    .contact form {
-        width: 90%; /* Make the form narrower on mobile */
-        max-width: 400px; /* Set a maximum width for very wide mobile screens */
-        margin: 0 auto; /* Center the form */
-    }
-
-    .contact input,
-    .contact textarea {
-        font-size: 16px; /* Ensure the font is large enough to prevent zooming on iOS */
-    }
-
-    .submit-button {
-        display: block; /* Make the button a block element */
-        margin: 0 auto; /* Center the button */
-        width: fit-content; /* Make the button width fit its content */
-    }
+.submit-button:hover::before {
+    left: 100%;
 }
 
 footer {
@@ -485,6 +423,7 @@ footer::before {
     height: 2px;
     background: linear-gradient(to right, transparent, var(--primary-color), transparent);
 }
+
 .social-icons {
     display: flex;
     justify-content: center;
@@ -502,85 +441,149 @@ footer::before {
     transform: scale(1.2);
 }
 
+/* Mobile styles */
 @media screen and (max-width: 768px) {
-    .nav-links {
-        position: fixed;
-        right: 0px;
-        height: 100vh;
-        top: 0;
-        background-color: rgba(17, 17, 17, 0.95);
-        backdrop-filter: blur(10px);
-        display: flex;
+    header {
+        width: 100%;
+        left: 0;
+        transform: none;
+        border-radius: 0;
+        padding-bottom: 0;
+    }
+
+    nav {
         flex-direction: column;
         align-items: center;
-        width: 50%;
-        transform: translateX(100%);
-        transition: transform 0.5s ease-in;
+        padding: 15px;
+    }
+
+    .logo {
+        margin-bottom: 10px;
+    }
+
+    .nav-links {
+        flex-direction: row;
         justify-content: center;
+        width: 100%;
     }
 
     .nav-links li {
-        opacity: 0;
-        margin: 20px 0;
+        margin: 0 10px;
     }
 
     .burger {
+        display: none;
+    }
+
+    .about-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .profile-image {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .contact form {
+        width: 90%;
+        max-width: 400px;
+    }
+
+    .submit-button {
         display: block;
-    }
-
-    .nav-active {
-        transform: translateX(0%);
-    }
-
-    @keyframes navLinkFade {
-        from {
-            opacity: 0;
-            transform: translateX(50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0px);
-        }
-    }
-
-    .toggle .line1 {
-        transform: rotate(-45deg) translate(-5px, 6px);
-    }
-
-    .toggle .line2 {
-        opacity: 0;
-    }
-
-    .toggle .line3 {
-        transform: rotate(45deg) translate(-5px, -6px);
+        margin: 0 auto;
+        width: fit-content;
     }
 }
 
-.fade-in {
-    opacity: 0;
-    transition: opacity 250ms ease-in;
+/* Chaotic background animation styles */
+body {
+    background-color: #000000;
 }
 
-.fade-in.appear {
-    opacity: 1;
+.chaotic-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+    overflow: hidden;
+    z-index: -1;
 }
 
-.from-left {
-    transform: translateX(-50%);
+.liquid-layer {
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    opacity: 0.7;
+    filter: blur(30px);
+    mix-blend-mode: screen;
 }
 
-.from-right {
-    transform: translateX(50%);
+.layer1 {
+    background: linear-gradient(45deg, #8a2be2, #4b0082, #9400d3, #800080);
+    animation: move 20s ease-in-out infinite alternate;
 }
 
-.from-left,
-.from-right {
-    transition: opacity 250ms ease-in, transform 400ms ease-in;
-    opacity: 0;
+.layer2 {
+    background: linear-gradient(-45deg, #9400d3, #4b0082, #8a2be2, #800080);
+    animation: move 15s ease-in-out infinite alternate-reverse;
 }
 
-.from-left.appear,
-.from-right.appear {
-    transform: translateX(0);
-    opacity: 1;
+.layer3 {
+    background: radial-gradient(circle at center, #8a2be2, #4b0082, #9400d3, transparent);
+    animation: pulse 10s ease-in-out infinite;
+}
+
+@keyframes move {
+    0%, 100% {
+        transform: translate(-10%, -10%) rotate(0deg) scale(1);
+    }
+    25% {
+        transform: translate(5%, 15%) rotate(45deg) scale(1.1);
+    }
+    50% {
+        transform: translate(10%, -5%) rotate(-45deg) scale(0.9);
+    }
+    75% {
+        transform: translate(-15%, 10%) rotate(25deg) scale(1.05);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scale(1.1);
+    }
+}
+
+.glow {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85vw;
+    height: 85vh;
+    background: radial-gradient(circle at center, rgba(138, 43, 226, 0.2) 0%, transparent 70%);
+    z-index: -2;
+    animation: glow-pulse 8s ease-in-out infinite alternate;
+}
+
+@keyframes glow-pulse {
+    0%, 100% {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    50% {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+    }
 }
