@@ -1,0 +1,119 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    line-height: 1.8;
+    background: #121212;
+    color: #e0e0e0;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #1f1f1f;
+    color: #d5b8ff;
+    padding: 1rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+    margin: 0;
+}
+
+main {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 700px;
+    background: #1e1e1e;
+    border-radius: 12px;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+main:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.6);
+}
+
+#answers-container {
+    display: grid;
+    gap: 15px;
+    grid-template-columns: 1fr;
+    margin: 20px 0;
+}
+
+button {
+    background: #333;
+    color: #cbc5b9;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+button:hover {
+    background: #444;
+    transform: scale(1.05);
+}
+
+.correct {
+    background: #4caf50 !important;
+    color: #fff;
+}
+
+.incorrect {
+    background: #f44336 !important;
+    color: #fff;
+}
+
+footer {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+footer p {
+    color: #777;
+    margin: 0;
+    padding: 10px 0;
+}
+
+#results {
+    display: none;
+}
+
+#timer-section {
+    margin-top: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#timer, #footer-timer {
+    font-size: 1.2rem;
+    color: #ff9800;
+    margin-top: 10px;
+}
+
+#timer.disabled, #footer-timer.disabled {
+    opacity: 0.5;
+}
+
+/* Блюр для контейнера питань */
+#question-container.blurred {
+    filter: blur(5px);
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* Стилізація кнопки старт/стоп */
+#start-stop-timer {
+    margin: 10px;
+    background-color: #ff9800;
+    color: white;
+}

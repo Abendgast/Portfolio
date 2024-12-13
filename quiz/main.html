@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вчимо методи Rust</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Вчимо методи Rust</h1>
+    </header>
+    <main>
+        <section id="test-area">
+            <div id="question-container">
+                <h2 id="question-title">Метод: Vec::new()</h2>
+                <div id="answers-container"></div>
+            </div>
+            <button id="next-question">Наступне питання</button>
+            <div id="timer-section">
+                <label>
+                    <input type="checkbox" id="use-timer"> Використовувати секундомір
+                </label>
+                <button id="start-stop-timer" style="display: none;">Старт</button>
+                <div id="timer" class="disabled">
+                    <span id="timer-value">00:00:000</span>
+                </div>
+            </div>
+        </section>
+        <section id="results" style="display: none;">
+            <h2>Тест завершено!</h2>
+            <p>Правильних відповідей: <span id="correct-count"></span> із <span id="total-questions"></span></p>
+            <p id="test-time" style="display: none;">Час проходження: <span id="total-time"></span></p>
+            <button id="restart-test">Пройти ще раз</button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
