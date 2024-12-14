@@ -34,6 +34,35 @@ main:hover {
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.6);
 }
 
+/* Стилі для бібліотек та кількості питань */
+#library-buttons, #question-count-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.library-select, .question-count {
+    background: #333;
+    color: #cbc5b9;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.library-select:hover, .question-count:hover {
+    background: #444;
+    transform: scale(1.05);
+}
+
+.library-select.selected, .question-count.selected {
+    background: #4caf50;
+    color: white;
+}
+
 #answers-container {
     display: grid;
     gap: 15px;
@@ -67,25 +96,6 @@ button:hover {
     color: #fff;
 }
 
-footer {
-    margin-top: 20px;
-    font-size: 0.9rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0 20px;
-}
-
-footer p {
-    color: #777;
-    margin: 0;
-    padding: 10px 0;
-}
-
-#results {
-    display: none;
-}
-
 #timer-section {
     margin-top: 20px;
     text-align: center;
@@ -94,26 +104,18 @@ footer p {
     align-items: center;
 }
 
-#timer, #footer-timer {
+#timer {
     font-size: 1.2rem;
     color: #ff9800;
     margin-top: 10px;
 }
 
-#timer.disabled, #footer-timer.disabled {
+#timer.disabled {
     opacity: 0.5;
 }
 
-/* Блюр для контейнера питань */
 #question-container.blurred {
     filter: blur(5px);
     pointer-events: none;
     opacity: 0.5;
-}
-
-/* Стилізація кнопки старт/стоп */
-#start-stop-timer {
-    margin: 10px;
-    background-color: #ff9800;
-    color: white;
 }
