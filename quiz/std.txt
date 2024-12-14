@@ -1,0 +1,10 @@
+std::string::String::push(): Додає символ до кінця рядка.
+std::vec::Vec::push(): Додає елемент до кінця вектора.
+std::fs::File::open(): Відкриває файл для читання або запису.
+std::thread::spawn(): Створює новий потік виконання.
+std::time::Instant::now(): Повертає поточний момент часу.
+std::io::Read::read(): Читає дані з джерела.
+std::iter::Iterator::map(): Перетворює елементи ітератора.
+std::string::String::len(): Повертає довжину рядка.
+std::collections::HashMap::insert(): Додає пару ключ-значення до хеш-карти.
+std::sync::Mutex::lock(): Блокує доступ до ресурсу.

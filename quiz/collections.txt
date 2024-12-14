@@ -1,0 +1,10 @@
+std::collections::Vec::new(): Створює новий вектор.
+std::collections::HashMap::get(): Повертає значення за ключем.
+std::collections::HashSet::contains(): Перевіряє, чи містить множина елемент.
+std::collections::LinkedList::push_back(): Додає елемент в кінець списку.
+std::collections::BTreeMap::insert(): Додає пару ключ-значення до B-дерева.
+std::collections::VecDeque::pop_front(): Видаляє перший елемент з двосторонньої черги.
+std::collections::HashMap::remove(): Видаляє пару ключ-значення з хеш-карти.
+std::collections::BinaryHeap::push(): Додає елемент до бінарної купи.
+std::collections::HashSet::insert(): Додає елемент до множини.
+std::collections::Vec::sort(): Сортує елементи вектора.

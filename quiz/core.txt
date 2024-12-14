@@ -1,0 +1,10 @@
+core::slice::len(): Повертає кількість елементів у зрізі.
+core::option::is_some(): Повертає true, якщо Option містить значення.
+core::result::is_ok(): Повертає true, якщо Result є Ok.
+core::iter::next(): Повертає наступний елемент ітератора.
+core::str::as_ptr(): Повертає вказівник на перший байт рядка.
+core::mem::size_of::<T>(): Повертає розмір типу T в байтах.
+core::primitive::add(): Виконує операцію додавання для чисел.
+core::clone::clone(): Створює копію об'єкта.
+core::cmp::PartialEq::eq(): Порівнює два значення на рівність.
+core::default::Default::default(): Повертає значення за замовчуванням для типу.

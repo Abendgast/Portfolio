@@ -1,0 +1,10 @@
+std::time::Duration::new(): Створює новий об'єкт тривалості.
+std::time::Instant::elapsed(): Повертає тривалість, що пройшла з моменту створення.
+std::time::SystemTime::now(): Повертає поточний системний час.
+std::time::Duration::as_secs(): Повертає тривалість у секундах.
+std::time::Duration::as_millis(): Повертає тривалість у мілісекундах.
+std::time::SystemTime::duration_since(): Повертає тривалість з моменту вказаного часу.
+std::time::Duration::from_secs(): Створює тривалість з кількості секунд.
+std::time::SystemTime::to_string(): Повертає рядкове представлення системного часу.
+std::time::Duration::sub(): Віднімає одну тривалість від іншої.
+std::time::Instant::from_millis(): Створює об'єкт Instant з мілісекунд.
