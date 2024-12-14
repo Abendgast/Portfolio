@@ -1,17 +1,23 @@
-const methods = [
-    { method: 'string.to_uppercase()', definition: 'Перетворює всі символи рядка на великі літери.' },
-    { method: 'vector.len()', definition: 'Повертає кількість елементів у векторі.' },
-    { method: 'vector.push()', definition: 'Додає елемент у вектор.' },
-    { method: 'vector.pop()', definition: 'Видаляє останній елемент з вектора і повертає його (як Option).' },
-    { method: 'option.unwrap()', definition: 'Повертає значення, якщо це Some, і викликає panic, якщо це None.' },
-    { method: 'result.unwrap()', definition: 'Повертає успішне значення або панікує у випадку помилки.' },
-    { method: 'string.len()', definition: 'Повертає довжину рядка в байтах.' },
-    { method: 'string.push()', definition: 'Додає символ у кінець рядка.' },
-    { method: 'vector.is_empty()', definition: 'Перевіряє, чи є вектор порожнім.' },
-    { method: 'option.is_some()', definition: 'Перевіряє, чи є значення Some.' },
-];
+// Завантаження методів з файлу modules.txt
+async function loadMethodsFromFile() {
+    try {
+        const response = await fetch('modules.txt');
+        const fileContent = await response.text();
+        const lines = fileContent.trim().split('\n');
 
-let availableQuestions = [...methods];
+        return lines.map(line => {
+            const [method, definition] = line.split(':').map(s => s.trim());
+            return { method, definition };
+        }).filter(item => item.method && item.definition);
+    } catch (error) {
+        console.error('Помилка читання modules.txt:', error);
+        return [];
+    }
+}
+
+// Глобальні змінні
+let methods = [];
+let availableQuestions = [];
 let correctAnswers = 0;
 let totalQuestions = 0;
 let blurApplied = false;
@@ -22,85 +28,34 @@ let elapsedTime = 0;
 let timerRunning = false;
 let timerUsed = false;
 
+// DOM елементи
 const questionContainer = document.getElementById('question-container');
 const timerValue = document.getElementById('timer-value');
 const useTimerCheckbox = document.getElementById('use-timer');
 const startStopTimerBtn = document.getElementById('start-stop-timer');
 const nextQuestionBtn = document.getElementById('next-question');
 
-// Увімкнення та вимкнення секундоміра
-useTimerCheckbox.addEventListener('change', () => {
-    const timer = document.getElementById('timer');
-    if (useTimerCheckbox.checked) {
-        timer.classList.remove('disabled');
-        startStopTimerBtn.style.display = 'block';
-        resetTimer();
-
-        // Застосовуємо блюр лише один раз за весь тест
-        if (!blurApplied) {
-            questionContainer.classList.add('blurred');
-            blurApplied = true;
-        }
-    } else {
-        timer.classList.add('disabled');
-        startStopTimerBtn.style.display = 'none';
-        stopTimer();
-
-        // Прибираємо блюр, якщо секундомір деактивовано
-        questionContainer.classList.remove('blurred');
-        blurApplied = false;
-    }
-});
-
-startStopTimerBtn.addEventListener('click', () => {
-    if (!timerRunning) {
-        startTimer();
-        startStopTimerBtn.textContent = 'Стоп';
-
-        // Прибираємо блюр при старті секундоміра
-        questionContainer.classList.remove('blurred');
-    } else {
-        stopTimer();
-        startStopTimerBtn.textContent = 'Старт';
-        completeTest(true);
-    }
-});
-
-function startTimer() {
-    if (timerRunning) return;
-    timerUsed = true;
-    timerRunning = true;
-    const startTime = Date.now() - elapsedTime;
-    timerInterval = setInterval(() => {
-        elapsedTime = Date.now() - startTime;
-        timerValue.textContent = formatTime(elapsedTime);
-    }, 10);
-}
-
-function stopTimer() {
-    clearInterval(timerInterval);
-    timerRunning = false;
-}
-
-function resetTimer() {
-    stopTimer();
-    elapsedTime = 0;
-    timerUsed = false;
-    timerValue.textContent = '00:00:000';
-    startStopTimerBtn.textContent = 'Старт';
-}
-
-function formatTime(ms) {
-    const mins = Math.floor(ms / 60000);
-    const secs = Math.floor((ms % 60000) / 1000);
-    const millis = ms % 1000;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${millis.toString().padStart(3, '0')}`;
-}
-
+// Shuffle функція
 function shuffle(array) {
     return array.sort(() => Math.random() - 0.5);
 }
 
+// Генерація унікальних варіантів
+function generateUniqueOptions(correctQuestion, allMethods, isMethodToDefinition) {
+    const uniqueOptions = new Set([
+        isMethodToDefinition ? correctQuestion.definition : correctQuestion.method
+    ]);
+
+    while (uniqueOptions.size < 4) {
+        const randomMethod = allMethods[Math.floor(Math.random() * allMethods.length)];
+        const option = isMethodToDefinition ? randomMethod.definition : randomMethod.method;
+        uniqueOptions.add(option);
+    }
+
+    return shuffle(Array.from(uniqueOptions));
+}
+
+// Відображення питання
 function displayQuestion() {
     const answersContainer = document.getElementById('answers-container');
 
@@ -118,11 +73,7 @@ function displayQuestion() {
         ? currentQuestion.definition
         : currentQuestion.method;
 
-    const options = shuffle(
-        isMethodToDefinition
-            ? [currentQuestion.definition, ...methods.map(m => m.definition).filter(d => d !== currentQuestion.definition).slice(0, 3)]
-            : [currentQuestion.method, ...methods.map(m => m.method).filter(m => m !== currentQuestion.method).slice(0, 3)]
-    );
+    const options = generateUniqueOptions(currentQuestion, methods, isMethodToDefinition);
 
     document.getElementById('question-title').textContent = isMethodToDefinition
         ? `Метод: ${currentQuestion.method}`
@@ -136,7 +87,6 @@ function displayQuestion() {
         answersContainer.appendChild(button);
     });
 
-    // Застосовуємо блюр, якщо секундомір увімкнено
     if (useTimerCheckbox.checked && !timerRunning && blurApplied) {
         questionContainer.classList.add('blurred');
     } else {
@@ -144,6 +94,7 @@ function displayQuestion() {
     }
 }
 
+// Решта функцій залишаються незмінними як в оригінальному скрипті
 function checkAnswer(button, isCorrect) {
     const buttons = document.querySelectorAll('#answers-container button');
     buttons.forEach(btn => btn.disabled = true);
@@ -182,6 +133,72 @@ function completeTest(manualStop = false) {
     }
 }
 
+// Функції секундоміра
+function startTimer() {
+    if (timerRunning) return;
+    timerUsed = true;
+    timerRunning = true;
+    const startTime = Date.now() - elapsedTime;
+    timerInterval = setInterval(() => {
+        elapsedTime = Date.now() - startTime;
+        timerValue.textContent = formatTime(elapsedTime);
+    }, 10);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerRunning = false;
+}
+
+function resetTimer() {
+    stopTimer();
+    elapsedTime = 0;
+    timerUsed = false;
+    timerValue.textContent = '00:00:000';
+    startStopTimerBtn.textContent = 'Старт';
+}
+
+function formatTime(ms) {
+    const mins = Math.floor(ms / 60000);
+    const secs = Math.floor((ms % 60000) / 1000);
+    const millis = ms % 1000;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${millis.toString().padStart(3, '0')}`;
+}
+
+// Події для кнопок
+useTimerCheckbox.addEventListener('change', () => {
+    const timer = document.getElementById('timer');
+    if (useTimerCheckbox.checked) {
+        timer.classList.remove('disabled');
+        startStopTimerBtn.style.display = 'block';
+        resetTimer();
+
+        if (!blurApplied) {
+            questionContainer.classList.add('blurred');
+            blurApplied = true;
+        }
+    } else {
+        timer.classList.add('disabled');
+        startStopTimerBtn.style.display = 'none';
+        stopTimer();
+
+        questionContainer.classList.remove('blurred');
+        blurApplied = false;
+    }
+});
+
+startStopTimerBtn.addEventListener('click', () => {
+    if (!timerRunning) {
+        startTimer();
+        startStopTimerBtn.textContent = 'Стоп';
+        questionContainer.classList.remove('blurred');
+    } else {
+        stopTimer();
+        startStopTimerBtn.textContent = 'Старт';
+        completeTest(true);
+    }
+});
+
 nextQuestionBtn.addEventListener('click', displayQuestion);
 
 document.getElementById('restart-test').addEventListener('click', () => {
@@ -197,4 +214,15 @@ document.getElementById('restart-test').addEventListener('click', () => {
     displayQuestion();
 });
 
-displayQuestion();
+// Ініціалізація
+async function initializeQuiz() {
+    methods = await loadMethodsFromFile();
+    if (methods.length === 0) {
+        alert('Не вдалося завантажити методи. Перевірте modules.txt');
+        return;
+    }
+    availableQuestions = [...methods];
+    displayQuestion();
+}
+
+document.addEventListener('DOMContentLoaded', initializeQuiz);
