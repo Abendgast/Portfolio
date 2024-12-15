@@ -30,10 +30,19 @@ let timerUsed = false;
 
 // DOM елементи
 const questionContainer = document.getElementById('question-container');
+const answersContainer = document.getElementById('answers-container');
+const questionTitle = document.getElementById('question-title');
 const timerValue = document.getElementById('timer-value');
 const useTimerCheckbox = document.getElementById('use-timer');
 const startStopTimerBtn = document.getElementById('start-stop-timer');
 const nextQuestionBtn = document.getElementById('next-question');
+const resultsSection = document.getElementById('results');
+const testAreaSection = document.getElementById('test-area');
+const correctCountSpan = document.getElementById('correct-count');
+const totalQuestionsSpan = document.getElementById('total-questions');
+const totalTimeSpan = document.getElementById('total-time');
+const testTimeSection = document.getElementById('test-time');
+const restartTestBtn = document.getElementById('restart-test');
 
 // Shuffle функція
 function shuffle(array) {
@@ -57,14 +66,15 @@ function generateUniqueOptions(correctQuestion, allMethods, isMethodToDefinition
 
 // Відображення питання
 function displayQuestion() {
-    const answersContainer = document.getElementById('answers-container');
-
     if (availableQuestions.length === 0) {
         completeTest();
         return;
     }
 
-    const currentQuestion = availableQuestions.pop();
+    // Видаляємо випадковий метод зі списку доступних питань
+    const randomIndex = Math.floor(Math.random() * availableQuestions.length);
+    const currentQuestion = availableQuestions.splice(randomIndex, 1)[0];
+
     const isMethodToDefinition = Math.random() < 0.5;
 
     totalQuestions++;
@@ -75,7 +85,7 @@ function displayQuestion() {
 
     const options = generateUniqueOptions(currentQuestion, methods, isMethodToDefinition);
 
-    document.getElementById('question-title').textContent = isMethodToDefinition
+    questionTitle.textContent = isMethodToDefinition
         ? `Метод: ${currentQuestion.method}`
         : `Опис: ${currentQuestion.definition}`;
 
@@ -87,6 +97,7 @@ function displayQuestion() {
         answersContainer.appendChild(button);
     });
 
+    // Логіка розмиття питання при активованому таймері
     if (useTimerCheckbox.checked && !timerRunning && blurApplied) {
         questionContainer.classList.add('blurred');
     } else {
@@ -94,7 +105,7 @@ function displayQuestion() {
     }
 }
 
-// Решта функцій залишаються незмінними як в оригінальному скрипті
+// Перевірка відповіді
 function checkAnswer(button, isCorrect) {
     const buttons = document.querySelectorAll('#answers-container button');
     buttons.forEach(btn => btn.disabled = true);
@@ -104,26 +115,29 @@ function checkAnswer(button, isCorrect) {
         button.classList.add('correct');
     } else {
         button.classList.add('incorrect');
-        const correctButton = Array.from(buttons).find(btn => btn.textContent === (document.getElementById('question-title').textContent.includes('Метод')
-            ? methods.find(m => m.method === document.getElementById('question-title').textContent.replace('Метод: ', '')).definition
-            : methods.find(m => m.definition === document.getElementById('question-title').textContent.replace('Опис: ', '')).method));
+        const correctButton = Array.from(buttons).find(btn => btn.textContent === (
+            questionTitle.textContent.includes('Метод')
+                ? methods.find(m => m.method === questionTitle.textContent.replace('Метод: ', '')).definition
+                : methods.find(m => m.definition === questionTitle.textContent.replace('Опис: ', '')).method
+        ));
         correctButton.classList.add('correct');
     }
 }
 
-function completeTest(manualStop = false) {
+// Завершення тесту
+function completeTest() {
     if (timerRunning) {
         stopTimer();
     }
 
-    document.getElementById('test-area').style.display = 'none';
-    document.getElementById('results').style.display = 'block';
-    document.getElementById('correct-count').textContent = correctAnswers;
-    document.getElementById('total-questions').textContent = totalQuestions;
+    testAreaSection.style.display = 'none';
+    resultsSection.style.display = 'block';
+    correctCountSpan.textContent = correctAnswers;
+    totalQuestionsSpan.textContent = totalQuestions;
 
     if (timerUsed) {
-        document.getElementById('test-time').style.display = 'block';
-        document.getElementById('total-time').textContent = formatTime(elapsedTime);
+        testTimeSection.style.display = 'block';
+        totalTimeSpan.textContent = formatTime(elapsedTime);
     }
 
     if (useTimerCheckbox.checked) {
@@ -143,11 +157,13 @@ function startTimer() {
         elapsedTime = Date.now() - startTime;
         timerValue.textContent = formatTime(elapsedTime);
     }, 10);
+    startStopTimerBtn.textContent = 'Стоп';
 }
 
 function stopTimer() {
     clearInterval(timerInterval);
     timerRunning = false;
+    startStopTimerBtn.textContent = 'Продовжити';
 }
 
 function resetTimer() {
@@ -165,56 +181,69 @@ function formatTime(ms) {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}:${millis.toString().padStart(3, '0')}`;
 }
 
-// Події для кнопок
-useTimerCheckbox.addEventListener('change', () => {
-    const timer = document.getElementById('timer');
-    if (useTimerCheckbox.checked) {
-        timer.classList.remove('disabled');
-        startStopTimerBtn.style.display = 'block';
-        resetTimer();
-
-        if (!blurApplied) {
-            questionContainer.classList.add('blurred');
-            blurApplied = true;
-        }
-    } else {
-        timer.classList.add('disabled');
-        startStopTimerBtn.style.display = 'none';
-        stopTimer();
-
-        questionContainer.classList.remove('blurred');
-        blurApplied = false;
-    }
-});
-
-startStopTimerBtn.addEventListener('click', () => {
-    if (!timerRunning) {
-        startTimer();
-        startStopTimerBtn.textContent = 'Стоп';
-        questionContainer.classList.remove('blurred');
-    } else {
-        stopTimer();
-        startStopTimerBtn.textContent = 'Старт';
-        completeTest(true);
-    }
-});
-
-nextQuestionBtn.addEventListener('click', displayQuestion);
-
-document.getElementById('restart-test').addEventListener('click', () => {
-    availableQuestions = [...methods];
+// Скидання тесту
+function restartTest() {
+    // Скидаємо всі глобальні змінні
+    methods = [];
+    availableQuestions = [];
     correctAnswers = 0;
     totalQuestions = 0;
     blurApplied = false;
+
+    // Скидаємо таймер
     resetTimer();
 
-    document.getElementById('results').style.display = 'none';
-    document.getElementById('test-time').style.display = 'none';
-    document.getElementById('test-area').style.display = 'block';
-    displayQuestion();
+    // Повертаємо інтерфейс до початкового стану
+    resultsSection.style.display = 'none';
+    testAreaSection.style.display = 'block';
+
+    // Ініціалізуємо тест знову
+    initializeQuiz();
+}
+
+// Додаємо обробники подій
+document.addEventListener('DOMContentLoaded', () => {
+    // Ініціалізація квізу
+    initializeQuiz();
+
+    // Обробник для кнопки "Наступне питання"
+    nextQuestionBtn.addEventListener('click', () => {
+        const buttons = document.querySelectorAll('#answers-container button');
+        buttons.forEach(btn => {
+            btn.classList.remove('correct', 'incorrect');
+            btn.disabled = false;
+        });
+        displayQuestion();
+    });
+
+    // Обробник для прапорця використання секундоміра
+    useTimerCheckbox.addEventListener('change', () => {
+        const timerDisplay = document.getElementById('timer');
+        startStopTimerBtn.style.display = useTimerCheckbox.checked ? 'block' : 'none';
+
+        if (useTimerCheckbox.checked) {
+            timerDisplay.classList.remove('disabled');
+            resetTimer();
+        } else {
+            timerDisplay.classList.add('disabled');
+            stopTimer();
+        }
+    });
+
+    // Обробник для кнопки старту/зупинки таймера
+    startStopTimerBtn.addEventListener('click', () => {
+        if (timerRunning) {
+            stopTimer();
+        } else {
+            startTimer();
+        }
+    });
+
+    // Обробник для перезапуску тесту
+    restartTestBtn.addEventListener('click', restartTest);
 });
 
-// Ініціалізація
+// Ініціалізація квізу
 async function initializeQuiz() {
     methods = await loadMethodsFromFile();
     if (methods.length === 0) {
@@ -224,5 +253,3 @@ async function initializeQuiz() {
     availableQuestions = [...methods];
     displayQuestion();
 }
-
-document.addEventListener('DOMContentLoaded', initializeQuiz);
