@@ -3,104 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
+    <title>DevOps Engineer Portfolio</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <a href="quiz/main.html">Тести </a> <br>
 </head>
 <body>
-
-<!---------------------------------------------------------------------------*ANIM1-------------------------------------------------------------------------*-->
-<!--    <div id="modern-morph"></div>-->
-<!---------------------------------------------------------------------------*ANIM1-------------------------------------------------------------------------*-->
-
-<!---------------------------------------------------------------------------*ANIM2-------------------------------------------------------------------------*-->
-<div class="shimmer-matter-bg"></div>
-<!---------------------------------------------------------------------------*ANIM2-------------------------------------------------------------------------*-->
-
-<!---------------------------------------------------------------------------*ANIM3-------------------------------------------------------------------------*-->
-
-<!---------------------------------------------------------------------------*ANIM3-------------------------------------------------------------------------*-->
+    <nav>
+        <div class="logo">
+            <h1>Serhii Prylepskyi</h1>
+            <p>DevOps Engineer</p>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
     <header>
-        <nav>
-            <div class="logo">My Portfolio</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="burger">
-                <div class="line1"></div>
-                <div class="line2"></div>
-                <div class="line3"></div>
-            </div>
-        </nav>
+        <div class="header-content fade-in">
+            <h1>Building <span class="highlight">Reliable</span> Infrastructure</h1>
+            <p>Automation • CI/CD • Security</p>
+            <a href="#contact" class="btn">Get in touch</a>
+        </div>
     </header>
 
-    <main>
-        <section id="home" class="hero">
-            <h1>Hello, I'm <span class="highlight">Name</span></h1>
-            <p>Rust Developer | DevOps | Creative Thinker</p>
-            <a href="#contact" class="cta-button">Get in Touch</a>
-        </section>
-
-        <section id="about" class="about">
+    <section id="about" class="slide-in">
+        <div class="container">
             <h2>About Me</h2>
             <div class="about-content">
-                <img src="/api/placeholder/300/300" alt="My photo" class="profile-image">
-                <p>
-                    I am a passionate and versatile developer specializing in creating dynamic and immersive experiences through thoughtful and innovative coding.
-                    With a strong foundation in [insert specific languages, like Python, C++, etc.],
-                    I bring creativity, precision, and efficiency to every project.
-                    My expertise spans across building complex systems, game development, and crafting user-centric applications, always ensuring optimal performance and an intuitive user experience.</p>
+                <div class="about-image">
+                    <div class="image-placeholder"></div>
+                </div>
+                <div class="about-text">
+                    <p>I am a budding DevOps engineer, studying at Vasyl Stefanyk Precarpathian National University, learning the Rust programming language, containerization and networking technologies, Linux, and many other technologies..</p>
+                    <p>My expertise includes:</p>
+                    <ul>
+                        <li>Kubernetes & Docker orchestration</li>
+                        <li>AWS, Azure, and GCP cloud solutions</li>
+                        <li>CI/CD pipeline optimization</li>
+                        <li>Infrastructure as Code (Terraform, Ansible)</li>
+                        <li>Monitoring and observability solutions</li>
+                    </ul>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <div class="projects-section">
-    <h2>My Projects</h2>
-    <div class="projects-container">
-        <div class="project-card">
-            <h3>Project 1</h3>
-            <p>This is a brief description of Project 1. It's a cool project about...</p>
-            <a href="#" class="project-btn">View Project</a>
+    <section id="projects" class="slide-in">
+        <div class="container">
+            <h2>Projects</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3>Cloud Migration & Optimization</h3>
+                    <p>Led the migration of legacy infrastructure to AWS, reducing costs by 40% and improving system reliability.</p>
+                    <div class="tech-stack">
+                        <span>AWS</span>
+                        <span>Terraform</span>
+                        <span>Docker</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>CI/CD Pipeline Automation</h3>
+                    <p>Designed and implemented a robust CI/CD pipeline using GitHub Actions and ArgoCD, reducing deployment time from hours to minutes.</p>
+                    <div class="tech-stack">
+                        <span>Kubernetes</span>
+                        <span>GitHub Actions</span>
+                        <span>ArgoCD</span>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <h3>Monitoring Infrastructure</h3>
+                    <p>Built a comprehensive monitoring solution using Prometheus, Grafana, and ELK stack to provide real-time insights into system performance.</p>
+                    <div class="tech-stack">
+                        <span>Prometheus</span>
+                        <span>Grafana</span>
+                        <span>ELK Stack</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="project-card">
-            <h3>Project 2</h3>
-            <p>This is a brief description of Project 2. It's a unique project that...</p>
-            <a href="#" class="project-btn">View Project</a>
+    </section>
+
+    <section id="contact" class="slide-in">
+        <div class="container">
+            <h2>Get In Touch</h2>
+<div class="contact-form">
+    <form action="https://formspree.io/f/xanenjog" method="POST">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" required>
         </div>
-        <div class="project-card">
-            <h3>Project 3</h3>
-            <p>This is a brief description of Project 3. It involves an innovative approach to...</p>
-            <a href="#" class="project-btn">View Project</a>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
         </div>
-        <!-- Add more project cards as needed -->
-    </div>
+        <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+        </div>
+        <button type="submit" class="btn">Send Message</button>
+    </form>
 </div>
-
-        <section id="contact" class="contact">
-            <h2>Get in Touch</h2>
-            <form id="contact-form">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="email" placeholder="Your Email" required>
-                <textarea name="message" placeholder="Your Message" required></textarea>
-                <button type="submit" class="submit-button">Send Message</button>
-            </form>
-        </section>
-    </main>
+                <div class="contact-info">
+                    <p>Feel free to reach out for collaborations or just a chat about DevOps and cloud technologies.</p>
+                    <div class="social-links">
+                        <a href="https://github.com/Abendgast" target="_blank"><i class="fab fa-github"></i></a>
+                        <a href="https://linkedin.com/in/Abendgast" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://t.me/Abendgast" target="_blank"><i class="fab fa-telegram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer>
-    <div class="social-icons">
-        <a href="https://github.com/Abendgast" target="_blank"><i class="fab fa-github"></i></a>
-        <a href="https://web.telegram.org/k/#@Abendgast" target="_blank"><i class="fab fa-telegram"></i></a>
-        <a href="https://www.linkedin.com/in/ваш-профиль/" target="_blank"><i class="fab fa-linkedin"></i></a>
-    </div>
-        <p>&copy; 2024 Your Name. All rights reserved.</p>
+        <div class="container">
+            <p>&copy; 2025 Serhii Prylepskyi. All rights reserved.</p>
+            <a href="quiz/main.html">Тести Rust</a> <br>
+        </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
